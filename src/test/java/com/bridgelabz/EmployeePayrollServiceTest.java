@@ -26,11 +26,11 @@ public class EmployeePayrollServiceTest {
         int employeePayrollData = employeePayrollServiceImplementation.preparedStatmentForWholeTableData("Roni",10);
         Assert.assertEquals(1,employeePayrollData);
     }
-//    @Test
-//    public void givenNameForEmployee_WhenRetrieved_ShouldMatchEmployeeCount() throws EmployeePayrollException {
-//        EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
-//        List<EmployeePayrollData> employeePayrollData = employeePayrollServiceImplementation.preparedStatmentForWholeTableData("Kitti");
-//        System.out.println(employeePayrollData);
-//        Assert.assertEquals(1,employeePayrollData.size());
-//    }
+    @Test
+    public void givenNameForEmployee_WhenRetrieved_ShouldMatchEmployeeCount() throws EmployeePayrollException {
+        EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
+        List<EmployeePayrollData> employeePayrollData = employeePayrollServiceImplementation.preparedStatmentForWholeTableData("Kitti");
+        System.out.println(employeePayrollData);
+        Assert.assertEquals(1,employeePayrollData.size());
+    }
 }
