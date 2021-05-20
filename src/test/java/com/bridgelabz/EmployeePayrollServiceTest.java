@@ -3,6 +3,7 @@ package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeePayrollServiceTest {
@@ -32,5 +33,12 @@ public class EmployeePayrollServiceTest {
         List<EmployeePayrollData> employeePayrollData = employeePayrollServiceImplementation.preparedStatmentForWholeTableData("Kitti");
         System.out.println(employeePayrollData);
         Assert.assertEquals(1,employeePayrollData.size());
+    }
+    @Test
+    public void givenDataRangeWeShouldBeAbleToFindAllTheEmployessJoined() throws EmployeePayrollException {
+        EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
+        ArrayList<EmployeePayrollData> employesJoinesForDateRange = employeePayrollServiceImplementation.findEmployesJoinesForDateRange("2018-11-09", "2020-01-10");
+        System.out.println(employesJoinesForDateRange);
+        Assert.assertEquals(3, employesJoinesForDateRange.size());
     }
 }

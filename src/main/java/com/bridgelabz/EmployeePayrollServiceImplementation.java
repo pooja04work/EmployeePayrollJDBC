@@ -24,7 +24,6 @@ public class EmployeePayrollServiceImplementation implements EmployeePayrollServ
             Connection connection = this.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            //System.out.println("result::::::::::::"+resultSet);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String name = resultSet.getString(2);
@@ -68,7 +67,6 @@ public class EmployeePayrollServiceImplementation implements EmployeePayrollServ
             Connection connection = this.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            System.out.println("result::::::::::::"+resultSet);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 //name = resultSet.getString(2);
@@ -82,10 +80,26 @@ public class EmployeePayrollServiceImplementation implements EmployeePayrollServ
         }
         return employeePayrollData;
     }
-//    public ArrayList<EmployeePayrollData> findEmployesJoinesForDateRange(String dateStart, String dateEnd) {
-//        String sql = String.format("select * from employeepayroll where start between cast('%s' as date) " +
-//                "and cast('%s' as date)", dateStart, dateEnd);
-//        return this.executeSqlAndReturnList(sql);
-//    }
+    public ArrayList<EmployeePayrollData> findEmployesJoinesForDateRange(String dateStart, String dateEnd) throws EmployeePayrollException {
+        String sql = String.format("select * from employeepayroll where start between cast('%s' as date) and cast('%s' as date)", dateStart, dateEnd);
+        List<EmployeePayrollData> employeePayrollData = new ArrayList<>();
+        try {
+            Connection connection = this.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                double salary = resultSet.getDouble(3);
+                Date start = resultSet.getDate(4);
+                String gender = resultSet.getString(5);
+                employeePayrollData.add(new EmployeePayrollData(id, name, salary, start, gender));
+            }
+        } catch (SQLException e) {
+            throw new EmployeePayrollException("Cannot establish connection",EmployeePayrollException.ExceptionType.CONNECTION_FAIL);
+        }
+        return (ArrayList<EmployeePayrollData>) employeePayrollData;
+    }
+
 }
 
