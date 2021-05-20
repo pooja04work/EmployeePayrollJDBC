@@ -20,12 +20,12 @@ public class EmployeePayrollServiceTest {
         int employeePayrollData = employeePayrollServiceImplementation.getEmployeePayrollData("Roni",32000);
         Assert.assertEquals(1,employeePayrollData);
     }
-//    @Test
-//    public void givenNewSalaryForEmployee_WhenUpdated_ShouldMatchUsingPreparedStatement() throws EmployeePayrollException {
-//        EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
-//        int employeePayrollData = employeePayrollServiceImplementation.preparedStatmentForWholeTableData("Roni",10);
-//        Assert.assertEquals(1,employeePayrollData);
-//    }
+    @Test
+    public void givenNewSalaryForEmployee_WhenUpdated_ShouldMatchUsingPreparedStatement() throws EmployeePayrollException {
+        EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
+        int employeePayrollData = employeePayrollServiceImplementation.preparedStatmentForWholeTableData("Roni",10);
+        Assert.assertEquals(1,employeePayrollData);
+    }
 //    @Test
 //    public void givenNameForEmployee_WhenRetrieved_ShouldMatchEmployeeCount() throws EmployeePayrollException {
 //        EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
