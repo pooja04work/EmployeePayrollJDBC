@@ -38,17 +38,17 @@ public class EmployeePayrollServiceImplementation implements EmployeePayrollServ
         }
         return employeePayrollData;
     }
-//    @Override
-//    public int getEmployeePayrollData(String Name, int salary) throws EmployeePayrollException {
-//            String sql = String.format("update  employeepayroll set salary=%d where name='%s'", salary, Name);
-//            try {
-//                Connection connection = this.getConnection();
-//                Statement statement = connection.createStatement();
-//                return statement.executeUpdate(sql);
-//            } catch (SQLException throwables) {
-//                throw new EmployeePayrollException("Cannot establish connection",EmployeePayrollException.ExceptionType.CONNECTION_FAIL);
-//            }
-//    }
+    @Override
+    public int getEmployeePayrollData(String Name, int salary) throws EmployeePayrollException {
+            String sql = String.format("update  employeepayroll set salary=%d where name='%s'", salary, Name);
+            try {
+                Connection connection = this.getConnection();
+                Statement statement = connection.createStatement();
+                return statement.executeUpdate(sql);
+            } catch (SQLException throwables) {
+                throw new EmployeePayrollException("Cannot establish connection",EmployeePayrollException.ExceptionType.CONNECTION_FAIL);
+            }
+    }
 //    @Override
 //    public int preparedStatmentForWholeTableData(String Name, int salary) throws EmployeePayrollException {
 //        String sql = String.format("update  employeepayroll set salary=10 where name='Roni'");
