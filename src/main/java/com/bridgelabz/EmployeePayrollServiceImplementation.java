@@ -105,8 +105,8 @@ public class EmployeePayrollServiceImplementation implements EmployeePayrollServ
         }
         return (ArrayList<EmployeePayrollData>) employeePayrollData;
     }
-
-    public HashMap<String, Integer> performOperationsOnSalaryOf(String operation) {
+    @Override
+    public HashMap<String, Integer> performOperationsOnSalaryOf(String operation) throws EmployeePayrollException {
         HashMap<String, Integer> resultList = new HashMap<>();
         String sql = String.format("select gender,%s(salary) from employeepayroll group by gender", operation);
         try {
@@ -119,15 +119,35 @@ public class EmployeePayrollServiceImplementation implements EmployeePayrollServ
                 int salary = resultSet.getInt(coloumnName);
                 resultList.put(gender, salary);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new EmployeePayrollException("Cannot establish connection", EmployeePayrollException.ExceptionType.CONNECTION_FAIL);
         }
         return resultList;
     }
-    public int performOperationOnSalaryOfEmployees(String operation) {
+
+    public int performOperationOnSalaryOfEmployees(String operation) throws EmployeePayrollException {
         EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
         HashMap<String, Integer> resultMap = employeePayrollServiceImplementation.performOperationsOnSalaryOf(operation);
         int result = resultMap.get("F");
         return result;
     }
-}
+
+    public int dataInsertionInDatabase(String name, double salary, Date start, String gender) throws SQLException, EmployeePayrollException {
+        try {
+            Connection connection = this.getConnection();
+            System.out.println(connection);
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employeepayroll(name,salary,start,gender) values(?,?,?,?); ");
+            preparedStatement.setNString(1, name);
+            preparedStatement.setDouble(2, salary);
+            preparedStatement.setDate(3, start);
+            preparedStatement.setNString(4, gender);
+            int result= preparedStatement.executeUpdate();
+            System.out.println(result);
+            } catch (SQLException e) {
+            throw new EmployeePayrollException("Cannot establish connection", EmployeePayrollException.ExceptionType.CONNECTION_FAIL);
+        }
+        return 1;
+    }
+
+    }

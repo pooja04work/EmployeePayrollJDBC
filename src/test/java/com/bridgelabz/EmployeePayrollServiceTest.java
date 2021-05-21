@@ -2,6 +2,8 @@ package com.bridgelabz;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,5 +61,17 @@ public class EmployeePayrollServiceTest {
         System.out.println("Max: " + employeePayrollServiceImplementation.performOperationOnSalaryOfEmployees("max"));
         System.out.println("Min: " + employeePayrollServiceImplementation.performOperationOnSalaryOfEmployees("min"));
 
+    }
+
+    @Test
+    public void givenNewDataOfEmployeeInPayroll_WhenRetrieved_ShouldReturn1() throws SQLException, EmployeePayrollException {
+        EmployeePayrollServiceImplementation employeePayrollServiceImplementation = new EmployeePayrollServiceImplementation();
+        String name = "Punam";
+        String gender = "F";
+        double salary = 2100000;
+        Date start = new Date(2021-03-27);
+        Integer employee_id = 7;
+        int result1 = employeePayrollServiceImplementation.dataInsertionInDatabase(name, salary, start, gender);
+        Assert.assertEquals(1, result1);
     }
 }
